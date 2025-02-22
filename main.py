@@ -1,4 +1,5 @@
 import sys
+from stats import get_word_count
 
 def main():
     print(sys.argv)
@@ -7,7 +8,6 @@ def main():
         sys.exit(1)
     else:
         book_path = sys.argv[1]
-    #book_path = "books/frankenstein.txt"
     contents = get_book_text(book_path)
 
     word_count = get_word_count(contents)
@@ -15,10 +15,6 @@ def main():
 
     generate_report(book_path, word_count, character_count)
 
-
-def get_word_count(book):
-    words = book.split()
-    return len(words)
 
 def get_character_count(book):
     char_counts = {}
@@ -40,7 +36,7 @@ def generate_report(book_path, word_count, character_count):
 
     for character in sorted_dict:
         if character.isalpha():
-            print(f"The '{character}' character was found {character_count[character]} times")
+            print(f"{character}: {character_count[character]}")
 
 def get_book_text(path):
     with open(path) as f:
